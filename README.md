@@ -496,27 +496,168 @@ mlflow.log_params({'model_name': 'llama2', 'chunk_size': 512})
 
 ## 🧠 Additional Study Notes
 
-(Contains detailed reminders for RAG optimization, Databricks Vector Search, Feature Store, and more.)
+🔍 RAG Pipelines & Optimization
+End-to-End Flow: Ingest → preprocess → chunk → embed → index → retrieve → prompt → generate.
+Chunking & Evaluation:
+Choose chunk strategy (semantic, sliding window) based on Recall@k or NDCG.
+Use LLM-as-a-judge or human evals to tune retrieval performance.
+Indexing: Use Delta tables + Databricks Vector Search to manage embeddings.
+Retrieval Tip: Use metadata filters (e.g. book="1") to narrow scope in dense indexes.
 
-*(Content preserved exactly as provided by user)*
+🧠 Databricks Vector Search & Index Management
+Databricks Vector Search:
+Indexes Delta tables with embedded chunks.
+Query with .search() or SQL ai_query().
+Supports hybrid search: keyword + embedding for better relevance.
+Similarity Metric: Default is L2 via HNSW. Normalize embeddings for cosine similarity.
+Filtering: Add section, doc_type, or user_role as metadata filters.
 
----
+⚡ Real-Time Data with Feature Store
+Use Databricks Feature Store + Feature Serving to supply live, structured inputs.
+Example: Serve up-to-date delivery times, account balances, or session state.
+Complements RAG by grounding with real-time facts.
+Secure via Unity Catalog + auto-scaling endpoints.
 
-## 🧠 Additional GenAI Study Notes (Cleaned & Expanded)
+🚀 Model Serving & AI SQL Functions
+Model Deployment Options:
+MLflow PyFunc → wrap chains or preprocessors.
+Hosted foundation models via MosaicML → use dbx.ChatCompletion().
+AI Functions:
+SQL-native: ai_query() or llm_query() for inline LLM inference.
+Useful for dashboards and reporting.
 
-*(Full expanded section with tooling, libraries, governance, evaluation, etc. retained exactly as in the original content.)*
+🧰 MLflow PyFunc + Secrets Best Practices
+Use PyFunc for chaining LLM calls with custom logic.
+Avoid spark.conf.set() for secrets — use environment variables or Databricks Secrets.
+Track prompt templates, metrics, input/output examples in MLflow runs.
 
----
+🔐 Unity Catalog Governance
+Store all data (chunks, features, logs) in Unity Catalog-backed tables.
+Use UC to manage ACLs, model promotion, and audit trails.
+Enable table and model lineage for traceability.
 
-> 💡 **Tip:** Bookmark sections using the Table of Contents for instant navigation during revision or project implementation.
+🤖 Agents, Tools, & Multi-Step Reasoning
+Agent Use Case: When an LLM needs to decide dynamically between tools (e.g., RAG vs SQL vs API call).
+Tool list is passed as part of system prompt.
+Use LangChain or Databricks Agents to build agents with memory and tool use.
 
----
+✏️ Prompt Engineering Enhancements
+Input Augmentation: Dynamically insert user-specific context (e.g. plan_type, locale, account_status).
+Output Formatting: Guide model with structure (e.g. "Respond in JSON with fields X, Y, Z").
+Pre-processing: Use PyFunc to sanitize inputs, enforce format, or append extra context before prompt hits LLM.
 
-© 2025 — Compiled by Mussarrat | Study Notes for Databricks Certified Generative AI Engineer Associate
+📊 Model Selection & Trade-offs
+Model Type	Use Case
+Small Open Models	Low-latency tasks (e.g. classification, tagging)
+Large Open Models	Reasoning-heavy RAG with self-hosted options
+Proprietary Models	Complex summarization, conversational agents
+Check context length, MMLU scores, architecture type when comparing.
+Use proprietary APIs only if compliance risk is acceptable.
 
-```
+🧪 Monitoring & Evaluation Metrics
+Before deployment (eval):
 
----
+BLEU/ROUGE for summarization
+MMLU for general model strength
+Retrieval: Precision@k, Recall@k, NDCG
+Post-deployment (monitoring):
 
-Would you like me to now generate a **downloadable version** (`README.md` file) of this so you can upload it directly to your GitHub repo (preserving formatting exactly)?
-```
+Token count, latency, success/failure rate
+Retrieval relevance score
+Output rejection rate (e.g. via safety guardrails)
+
+⚖️ Guardrails: Types & Use Cases
+Type	Purpose
+Safety	Block offensive/harmful inputs
+Compliance	Enforce business or legal constraints (e.g. no politics)
+Contextual	Ensure outputs align with user scope/intended use
+Evaluation	Human or model-in-the-loop scoring & audits
+Use input filters + output format checks + system prompt constraints.
+Guardrails can wrap the entire app or live inside a chain.
+
+🧠 DatabricksIQ, LakehouseIQ, & Assistant Features
+DatabricksIQ: LLM assistant for code, SQL, and UI help. Not exposed via API.
+LakehouseIQ: Natural language interface over structured data. Supports business-specific querying (e.g. “show me sales by channel for Q2”).
+SQL AI Functions:
+Use ai_query() in dashboards or notebooks for lightweight inference.
+Ideal for summarization, classification, or content tagging in batch.
+
+🧠 Additional GenAI Study Notes (Cleaned & Expanded)
+✅ Prompt Design & Output Control
+Neutralizing Tone: Instruct the LLM to rephrase emotionally charged input into neutral, professional language.
+
+Example: "Rewrite this message in a neutral, factual tone."
+Summarization Task: Condensing paragraphs into 1–2 sentences = summarization. Evaluate with ROUGE (coverage) or BLEU (precision).
+
+Output Structuring: Use clear format instructions (e.g., “Respond in JSON with fields X, Y, Z”) and few-shot examples for reliable formatting.
+
+🔁 LLM Workflows & Agents
+Multi-step LLM Workflow: Used when tasks require chaining multiple steps (e.g., retrieve → reason → act).
+
+Use LangChain or Databricks Agent Framework to orchestrate.
+ReAct Framework: Combines reasoning (thoughts) with tool actions — ideal for agentic LLMs making decisions and using tools.
+
+Agent Frameworks: Let LLMs select from registered tools (e.g., API lookup, SQL query, RAG retriever). Enables dynamic, goal-directed workflows.
+
+💲 Cost Management & Serving Patterns
+Pay-per-token: Ideal for low-volume use cases — no idle costs, scales with usage, no provisioning needed.
+
+Low-Cost RAG Setup: Efficient stack = Prompt + Retriever + LLM (no fine-tuning or agent logic unless required).
+
+📚 Feature Store & Real-Time Context
+Databricks Feature Serving: Serves structured, per-query data (e.g., user balance, delivery time) in real-time.
+Use when data can't be embedded in advance.
+Complements unstructured RAG by grounding LLMs in current state.
+
+🧱 Chunking & Semantic Context
+Section Headers in Chunks: Boost semantic clarity in RAG. Helps retriever/embedding models infer context.
+
+🧰 Tooling Overview
+Orchestration & Reasoning
+LangChain – Build chains, agents, tool use
+ReAct – Reasoning + acting loop for tool-using agents
+Evaluation & Monitoring
+MLflow – Track experiments, register models, deploy with PyFunc
+PyFunc lets you wrap preprocessing + postprocessing logic
+Evaluation Metrics:
+BLEU – Translation accuracy
+ROUGE – Summarization recall
+MMLU – General LLM benchmark (academic + reasoning)
+NDCG – Normalized Discounted Cumulative Gain, ranks relevance in retrieval
+LLMs-as-a-judge – LLMs evaluate outputs for quality/consistency
+
+🧠 Databricks-Specific Features
+LakehouseIQ – Natural language interface to structured data; understands metadata and lineage.
+MosaicML – Databricks-hosted open models; scalable + customizable foundation models.
+Unity Catalog Volume – Managed volume-based storage with access control + lineage (e.g., for models, training data).
+Inference Tables – Auto-log requests/responses from model serving endpoints — enables live debugging and monitoring.
+
+🧪 Embedding & Model Ecosystem
+Key Python Libraries
+unstructured – Extract text from PDFs, DOCX, HTML
+pytesseract – OCR for image-to-text
+langchain – Chain components, agents, tool use
+mlflow – Model tracking, serving, versioning
+sentence-transformers – Generate embeddings for retrieval
+transformers – Load/tokenize Hugging Face models
+pandas – Manipulate structured data
+openai – Interface with OpenAI models (e.g., GPT-4)
+faiss – Self-hosted vector search engine
+scrapy – Web scraping
+PyMuPDF – Extract structured text from PDFs (preserves layout)
+pdfplumber – Extract text from PDFs with table support
+doctr – Deep learning OCR for scanned PDFs/images (DocTR = Document Text Recognition)
+datasets (Hugging Face) – Load benchmark datasets for evaluation/fine-tuning
+
+🧠 Databricks LLMs – Simplified Reference
+Model Name	Notes
+DBRX	Databricks' flagship LLM; strong at summarization and general reasoning
+MPT (7B / 30B)	MosaicML models; efficient for chat/instruction-tuned tasks
+LLaMA (2, 3.1, 3.3, 4)	Meta’s open models; high performance for reasoning & chat
+CodeLLaMA	Optimized for code generation and understanding
+Claude (3.7, 4, Opus)	Anthropic models; excellent for deep reasoning, summarization
+Whisper-large-v3	OpenAI’s speech-to-text model; used for audio transcription
+BGE / GTE	Embedding models for RAG; fast and effective in dense retrieval
+Dolly (1.0 / 2.0)	Early Databricks models; not production-ready but good for learning
+DistilBERT	Lightweight transformer for classification or embedding
+
