@@ -1,6 +1,4 @@
----
 
-````markdown
 # 🧠 Databricks Certified Generative AI Engineer Associate – Study Notes
 
 Comprehensive notes to prepare for the **Databricks Certified Generative AI Engineer Associate** exam.  
