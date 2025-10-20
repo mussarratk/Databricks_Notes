@@ -1,4 +1,11 @@
 
+<img width="1260" height="616" alt="image" src="https://github.com/user-attachments/assets/0da3c19f-d58b-4efc-91d0-7d45e126eb7d" />
+
+<img width="1287" height="662" alt="image" src="https://github.com/user-attachments/assets/35383cb3-4661-4302-a0f2-da22187ae1b5" />
+
+<img width="1291" height="689" alt="image" src="https://github.com/user-attachments/assets/4bbd262d-f168-4089-92ce-14af26715453" />
+
+
 # 🧠 Databricks Certified Generative AI Engineer Associate – Study Notes
 
 Comprehensive notes to prepare for the **Databricks Certified Generative AI Engineer Associate** exam.  
