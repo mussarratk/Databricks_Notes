@@ -4,6 +4,8 @@
 <img width="1287" height="662" alt="image" src="https://github.com/user-attachments/assets/35383cb3-4661-4302-a0f2-da22187ae1b5" />
 
 <img width="1291" height="689" alt="image" src="https://github.com/user-attachments/assets/4bbd262d-f168-4089-92ce-14af26715453" />
+<img width="1268" height="677" alt="image" src="https://github.com/user-attachments/assets/cae5ba15-a320-41fa-ad45-63f2f4543230" />
+
 
 
 # 🧠 Databricks Certified Generative AI Engineer Associate – Study Notes
