@@ -6,7 +6,73 @@
 <img width="1291" height="689" alt="image" src="https://github.com/user-attachments/assets/4bbd262d-f168-4089-92ce-14af26715453" />
 <img width="1268" height="677" alt="image" src="https://github.com/user-attachments/assets/cae5ba15-a320-41fa-ad45-63f2f4543230" />
 
+<details>
 
+These frameworks—**SALT**, **RTF**, **CTF**, and the related **RASCEF** (often an expanded version of your queried **RASCEFT** with the 'T' for Tone or Target Audience sometimes implied or merged into other steps)—are structured methodologies for crafting effective prompts for large language models (LLMs) to ensure clear, targeted, and high-quality outputs.
+
+Here is a comprehensive elaboration of each.
+
+***
+
+## 1. SALT Framework
+**SALT** (**S**tructure, **A**djust, **L**everage, **T**est) is an iterative process framework focusing on refining the prompt until the desired output is achieved. It's more of an overall workflow for *optimizing* an existing prompt than a rigid structure for the initial prompt itself.
+
+| Component | Elaboration |
+| :--- | :--- |
+| **S**tructure | **The Foundation:** Define the basic prompt structure, including the **Role** for the AI, the **Task** (or instruction), and the desired **Format** (e.g., bulleted list, essay, table). Aim for clarity and avoid ambiguity. |
+| **A**djust | **Refinement:** Modify the initial structure to meet specific needs. This often involves tweaking the **Tone**, **Audience**, or **Length** of the response. For example, change the language from formal to casual or narrow the scope of the topic. |
+| **L**everage | **Enhancement:** Incorporate external elements to guide the AI more precisely. This includes leveraging **Context**, **Examples**, or specific **Constraints** (e.g., "Do not use jargon," "Use UK English"). Leveraging provides the necessary context and modeling for the output. |
+| **T**est | **Evaluation:** Run the prompt through the AI, **evaluate** the output against the original goal, and **iterate** (go back to Adjust or Structure) if the results are unsatisfactory. This ensures the prompt consistently delivers the desired quality and accuracy. |
+
+***
+
+## 2. RTF Framework
+The **RTF** (**R**ole, **T**ask, **F**ormat) framework is a popular, straightforward structure designed to eliminate guesswork by telling the AI who to be, what to do, and how to present the result.
+
+| Component | Elaboration |
+| :--- | :--- |
+| **R**ole | **Persona Assignment:** Define the **specific persona** or expertise the AI should assume. This narrows the AI's focus and helps it adopt the appropriate tone, knowledge base, and style. *Example: "Act as a seasoned financial analyst."* |
+| **T**ask | **Clear Instruction:** Specify the **exact objective** you want the AI to accomplish. The task should be clear, concise, and action-oriented. *Example: "Analyze the Q3 earnings report and identify the top three risks."* |
+| **F**ormat | **Output Structure:** Define the **desired structure and presentation** of the AI's response. This ensures the output is immediately usable. *Example: "Present the findings as a 3-column table with 'Risk,' 'Impact,' and 'Mitigation Strategy' as headers."* |
+
+***
+
+## 3. CTF Framework
+The **CTF** (**C**ontext, **T**ask, **F**ormat) framework is similar to RTF but prioritizes the *situation* over the AI's *persona*. It's excellent for requests that require significant background information for a relevant response.
+
+| Component | Elaboration |
+| :--- | :--- |
+| **C**ontext | **Background Information:** Provide the **background or situational details** relevant to the request. This helps the AI understand the *why* and the *scenario* behind the task. *Example: "Given the recent 15% increase in production costs and flat sales figures,..."* |
+| **T**ask | **Clear Instruction:** Specify the **exact action** the AI needs to perform. This is the main goal of the prompt. *Example: "...propose three cost-cutting measures for the next fiscal year."* |
+| **F**ormat | **Output Structure:** Define the **expected structure** for the response. *Example: "List the measures as a numbered, bulleted list, each with a brief justification."* |
+
+***
+
+## 4. RASCEF / RASCEFT Framework
+The **RASCEF** (**R**ole, **A**ction, **S**teps, **C**ontext, **E**xamples, **F**ormat) framework is one of the most comprehensive models, essentially combining and expanding on the elements of RTF and CTF. Your query mentions **RASCEFT**, where the final 'T' is sometimes included for **Tone** or **Target Audience**, though **RASCEF** is the more common acronym.
+
+| Component | Elaboration |
+| :--- | :--- |
+| **R**ole | **Persona Assignment:** Assign a **specific identity** to the AI to establish tone and expertise. *Example: "Act as an experienced copywriter."* |
+| **A**ction | **Core Task:** Clearly state the main **objective** or task the AI must achieve. *Example: "Write a short-form blog post."* |
+| **S**teps | **Process Outline:** Break down the complex action into a **sequential set of instructions** the AI must follow. This is crucial for multi-part or complicated tasks. *Example: "Step 1: Write an engaging headline. Step 2: Use three subheadings. Step 3: End with a specific call to action."* |
+| **C**ontext | **Background:** Provide all **necessary background information** or constraints for a relevant and accurate response. *Example: "The blog post is about time-saving tips for remote developers working in the UTC+5 timezone."* |
+| **E**xamples | **Style Guide:** Offer **concrete illustrations** or reference material to model the desired tone, style, or quality. This helps the AI match an output that words alone might not convey. *Example: "Use a friendly and slightly witty tone, similar to the provided sample paragraph."* |
+| **F**ormat | **Output Structure:** Specify the **presentation** of the final answer. *Example: "Output the post using markdown formatting with bolding for key terms."* |
+| **T**one/Target (Optional) | **Refinement:** If included, explicitly define the **Tone** (e.g., professional, witty, urgent) and/or the **Target Audience** (e.g., Gen Z, retired engineers) to whom the output is directed. |
+
+***
+
+## Framework Comparison and Use
+
+| Framework | Primary Focus | Best For | Key Components |
+| :--- | :--- | :--- | :--- |
+| **RTF** | Efficiency & Clarity | Simple, direct tasks needing a professional persona (e.g., drafting emails, summaries). | **Role, Task, Format** |
+| **CTF** | Contextual Relevance | Tasks that rely heavily on background information for accuracy (e.g., market analysis, scenario planning). | **Context, Task, Format** |
+| **RASCEF** | Detail & Complexity | Highly complex, multi-step tasks where quality control, modeling, and detailed instructions are paramount. | **Role, Action, Steps, Context, Examples, Format** |
+| **SALT** | Optimization & Iteration | Refining poor-performing prompts to improve subsequent outputs over multiple attempts. | **Structure, Adjust, Leverage, Test** |
+ 
+</details>
 
 # 🧠 Databricks Certified Generative AI Engineer Associate – Study Notes
 
